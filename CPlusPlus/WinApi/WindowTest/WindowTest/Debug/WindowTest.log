@@ -1,0 +1,3 @@
+﻿  MainSourceCode.cpp
+l:\iteducation\testprograms\test-programs\cplusplus\winapi\windowtest\windowtest\mainsourcecode.cpp(11): warning C4101: WindowHandler: неиспользованная локальная переменная
+  WindowTest.vcxproj -> L:\iteducation\TestPrograms\Test-programs\CPlusPlus\WinApi\WindowTest\Debug\WindowTest.exe
