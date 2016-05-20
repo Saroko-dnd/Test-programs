@@ -6,8 +6,13 @@ LRESULT CALLBACK MainWindowProcedure(HWND hWnd, // дескриптор окошка
 	WPARAM wParam, // параметры
 	LPARAM lParam) // сообщений, дл€ последующего обращени€
 {
-	// 1) создаЄм нужные переменные
-	// 2) расписываем услови€, при которых нужно выполнить нужное действие (switch)
-	// 3) ¬озвращаем значение функции
+	switch (uMsg) 
+	{
+		case WM_DESTROY: // если окошко закрылось, то:
+			PostQuitMessage(NULL); // отправл€ем WinMain() сообщение WM_QUIT
+			break;
+		default:
+			return DefWindowProc(hWnd, uMsg, wParam, lParam);
+	}
 	return NULL;
 }
