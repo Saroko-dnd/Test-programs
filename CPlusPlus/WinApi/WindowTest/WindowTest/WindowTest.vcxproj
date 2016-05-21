@@ -147,9 +147,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="MainSourceCode.cpp" />
+    <ClCompile Include="WindowCreation.cpp" />
     <ClCompile Include="WindowProcedure.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="WindowCreation.h" />
     <ClInclude Include="WindowProcedure.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
