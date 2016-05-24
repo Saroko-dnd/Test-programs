@@ -18,8 +18,7 @@ bool WC_RegisterWindowClass(TCHAR NewClassName[], HINSTANCE CurrentApplicationIn
 	WindowStruct.hIconSm = LoadIcon(CurrentApplicationInstanceHandler, MAKEINTRESOURCE(FOX_ICON)); //Загружаем иконку используя файл ресурсов (MyResources.rc) по его имени (defined in MyResources.h)
 	WindowStruct.hCursor = LoadCursor(CurrentApplicationInstanceHandler, MAKEINTRESOURCE(CURSOR_GREEN));//Загружаем курсор используя файл ресурсов (MyResources.rc) по его имени (defined in MyResources.h)
 	WindowStruct.hbrBackground = (HBRUSH)GetStockObject(LTGRAY_BRUSH); //A handle to the class background brush. If set to NULL, then background has a color based on current client area settings (default). 
-	WindowStruct.lpszMenuName = NULL;//Pointer to a null-terminated character string that specifies the resource name of the class menu, as the name appears in the resource file.
-									 //NULL if we dont have any menu
+	WindowStruct.lpszMenuName = MAKEINTRESOURCE(NEW_MENU);//Создаем меню из MyResources.rc по его идентификатору (описан в MyResources.h)
 	WindowStruct.lpszClassName = NewClassName;//Можно также = TEXT("Имя моего класса");
 
 											  //Регистрируем класс окна для дальнейшего использования при создании окна(окон)
