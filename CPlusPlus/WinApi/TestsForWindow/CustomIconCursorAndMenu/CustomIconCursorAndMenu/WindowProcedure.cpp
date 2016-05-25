@@ -9,21 +9,33 @@ LRESULT CALLBACK MainWindowProcedure(HWND hWnd, // дескриптор окошка
 {
 	switch (uMsg)
 	{
-	case WM_COMMAND:
-		if (wParam == MENU_FILE_NEW)
-		{
-			MessageBox(NULL, TEXT("Вы попытались создать новый файл!"), MYRES_MESSAGEBOX_HEADER, MB_OK | MB_ICONASTERISK);
-		}
-		else if (wParam == MENU_FILE_OPEN)
-		{
-			MessageBox(NULL, TEXT("Вы попытались открыть меню для поиска и загрузки уже созданных файлов!"), MYRES_MESSAGEBOX_HEADER, MB_OK | MB_ICONASTERISK);
-		}
-		break;
-	case WM_DESTROY: // если окошко закрылось, то:
-		PostQuitMessage(NULL); // отправляем WinMain() сообщение WM_QUIT
-		break;
-	default:
-		return DefWindowProc(hWnd, uMsg, wParam, lParam);
+		case WM_COMMAND:
+			//Обработка сообщений от меню окна
+			switch (wParam)
+			{
+				case MENU_FILE_NEW:
+					MessageBox(NULL, MYRES_MESSAGEBOX_FILE_NEW, MYRES_MESSAGEBOX_HEADER, MB_OK | MB_ICONASTERISK);
+					break;
+				case MENU_FILE_OPEN:
+					MessageBox(NULL, MYRES_MESSAGEBOX_FILE_OPEN, MYRES_MESSAGEBOX_HEADER, MB_OK | MB_ICONASTERISK);
+					break;
+				case MENU_FILE_ENCRYPT:
+					MessageBox(NULL, MYRES_MESSAGEBOX_FILE_ENCRYPT, MYRES_MESSAGEBOX_HEADER, MB_OK | MB_ICONASTERISK);
+					break;
+				case MENU_FILE_DECRYPT:
+					MessageBox(NULL, MYRES_MESSAGEBOX_FILE_DECRYPT, MYRES_MESSAGEBOX_HEADER, MB_OK | MB_ICONASTERISK);
+					break;
+				case MENU_FILE_EXIT:
+					//Прерываем цикл обработки сообщений (завершаем программу)
+					PostQuitMessage(0); 
+					break;
+			} 
+			break;
+		case WM_DESTROY: // если окошко закрылось, то:
+			PostQuitMessage(NULL); // отправляем WinMain() сообщение WM_QUIT
+			break;
+		default:
+			return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	}
 	return NULL;
 }
