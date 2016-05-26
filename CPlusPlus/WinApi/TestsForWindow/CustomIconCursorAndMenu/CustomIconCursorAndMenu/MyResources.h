@@ -15,6 +15,10 @@
 #define MENU_FILE_EXIT	1005
 #define MENU_FILE_ENCRYPT	1006
 #define MENU_FILE_DECRYPT	1007
+#define MENU_TEXT_BOLD	1008
+#define MENU_TEXT_ITALIC	1009
+#define MENU_TEXT_UNDERLINE	1010
+
 
 //Тексты для MessageBox
 #define MYRES_MESSAGEBOX_HEADER TEXT("Уведомление")
