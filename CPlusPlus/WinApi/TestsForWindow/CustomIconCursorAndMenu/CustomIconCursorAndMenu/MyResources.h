@@ -19,6 +19,10 @@
 #define MENU_TEXT_ITALIC	1009
 #define MENU_TEXT_UNDERLINE	1010
 
+//идентификаторы иконок для меню
+#define FILE_NEW_ICON	1011
+#define FILE_OPEN_ICON	1012
+#define FILE_ENCRYPT_ICON	1013
 
 //Тексты для MessageBox
 #define MYRES_MESSAGEBOX_HEADER TEXT("Уведомление")

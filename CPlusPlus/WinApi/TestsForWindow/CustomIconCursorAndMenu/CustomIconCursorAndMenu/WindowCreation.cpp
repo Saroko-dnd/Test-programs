@@ -4,6 +4,7 @@
 #include "resource.h"
 #include <Windows.h>
 
+// Регистрирует класс окна
 bool WC_RegisterWindowClass(TCHAR NewClassName[], HINSTANCE CurrentApplicationInstanceHandler)
 {
 	WNDCLASSEX WindowStruct;
@@ -30,6 +31,7 @@ bool WC_RegisterWindowClass(TCHAR NewClassName[], HINSTANCE CurrentApplicationIn
 	return true;
 }
 
+// Создает окно определенного класса
 HWND WC_CreateWindow(TCHAR ClassName[], HINSTANCE CurrentApplicationInstanceHandler)
 {
 	int WindowWidth = 800;
@@ -54,6 +56,7 @@ HWND WC_CreateWindow(TCHAR ClassName[], HINSTANCE CurrentApplicationInstanceHand
 		);
 }
 
+//Активирует окно и запускает цикл обрабатывающий сообщения от ОС 
 WPARAM WC_ActivateWindow(HWND CurrentWindowHandler, int ShowCommand)
 {
 	ShowWindow(CurrentWindowHandler, ShowCommand);

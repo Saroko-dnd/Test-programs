@@ -7,7 +7,7 @@ int WINAPI WinMain(HINSTANCE HandlerOfCurrentApplicationInstance,
 	LPSTR lpCommandLine,
 	int nCommandShow
 	)
-{
+{	
 	TCHAR WindowClassName[] = TEXT("Имя моего класса");
 	// создаём дескриптор окна
 	HWND WindowHandler;

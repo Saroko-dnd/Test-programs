@@ -9,6 +9,14 @@ LRESULT CALLBACK MainWindowProcedure(HWND hWnd, // дескриптор окошка
 {
 	switch (uMsg)
 	{
+		//¬ момент создани€ окна снабжаем его меню новыми иконками
+		case WM_CREATE:
+		{
+			SetNewIconsForMenu(hWnd, MENU_FILE_NEW, FILE_NEW_ICON);
+			SetNewIconsForMenu(hWnd, MENU_FILE_OPEN, FILE_OPEN_ICON);
+			SetNewIconsForMenu(hWnd, MENU_FILE_ENCRYPT, FILE_ENCRYPT_ICON);
+			break;
+		}
 		case WM_COMMAND:
 			//ќбработка сообщений от меню окна
 			switch (wParam)
@@ -49,6 +57,7 @@ LRESULT CALLBACK MainWindowProcedure(HWND hWnd, // дескриптор окошка
 	return NULL;
 }
 
+//»змен€ет состо€ние выбранного MENUITEM на противоположное (убирает или добавл€ет иконку с галочкой)
 void ChangeMenuState(HWND CurrentWindowHandler, UINT MenuID)
 {
 	HMENU CurrentMenu = GetMenu(CurrentWindowHandler);
@@ -61,4 +70,13 @@ void ChangeMenuState(HWND CurrentWindowHandler, UINT MenuID)
 	{
 		CheckMenuItem(CurrentMenu, MenuID, MF_CHECKED);
 	}
+}
+
+//”станавливает новую иконку дл€ выбранного MENUITEM в меню указанного окна
+void SetNewIconsForMenu(HWND CurrentWindowHandler, UINT MenuID, UINT IconID)
+{
+	HINSTANCE ApplicationHandler = GetModuleHandle(NULL);
+	HBITMAP NewIcon = LoadBitmap(ApplicationHandler, MAKEINTRESOURCE(IconID));
+	HMENU CurrentMenu = GetMenu(CurrentWindowHandler);
+	SetMenuItemBitmaps(CurrentMenu, MenuID, MF_BYCOMMAND, NewIcon, NewIcon);
 }
