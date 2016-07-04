@@ -1,0 +1,17 @@
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\bin\Debug\DIContainerTest.exe.config
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\bin\Debug\DIContainerTest.exe
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\bin\Debug\DIContainerTest.pdb
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\DIContainerTest.csprojResolveAssemblyReference.cache
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\MainWindow.g.cs
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\App.g.cs
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\DIContainerTest_MarkupCompile.cache
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\DIContainerTest_MarkupCompile.lref
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\MainWindow.baml
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\DIContainerTest.g.resources
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\DIContainerTest.Properties.Resources.resources
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\DIContainerTest.csproj.GenerateResource.Cache
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\DIContainerTest.exe
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\DIContainerTest.pdb
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\bin\Debug\Ninject.dll
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\bin\Debug\Ninject.xml
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\DIContainerTest\DIContainerTest\obj\Debug\DIContainerTest.Resources.Texts.resources
