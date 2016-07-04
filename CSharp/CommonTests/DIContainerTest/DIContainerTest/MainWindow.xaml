@@ -7,8 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <DockPanel>
-        <Label HorizontalAlignment="Center" VerticalAlignment="Center" Name="LabelWarriorGear">
-            
-        </Label>
+        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Name="LabelFirstWarriorGear">
+            </Label>
+            <Label Name="LabelSecondWarriorGear">
+            </Label>
+            <Label Name="LabeldWarriorWithConstructorGear">
+            </Label>
+        </StackPanel>
     </DockPanel>
 </Window>

@@ -120,7 +120,25 @@
   <data name="Bow" xml:space="preserve">
     <value>bow</value>
   </data>
+  <data name="ConsrtuctotArgumentNameForWarrior" xml:space="preserve">
+    <value>NewName</value>
+  </data>
+  <data name="ConstructorArgumentName" xml:space="preserve">
+    <value>NewSwordMaterial</value>
+  </data>
   <data name="Gear" xml:space="preserve">
     <value>Warrior has:</value>
+  </data>
+  <data name="Has" xml:space="preserve">
+    <value>has:</value>
+  </data>
+  <data name="Material" xml:space="preserve">
+    <value>steel</value>
+  </data>
+  <data name="NameOfWarrior" xml:space="preserve">
+    <value>Sand</value>
+  </data>
+  <data name="Sword" xml:space="preserve">
+    <value>sword</value>
   </data>
 </root>

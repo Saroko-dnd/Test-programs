@@ -66,7 +66,9 @@
     </Compile>
     <Compile Include="TestClasses\Bow.cs" />
     <Compile Include="TestClasses\IWeapon.cs" />
+    <Compile Include="TestClasses\Sword.cs" />
     <Compile Include="TestClasses\Warrior.cs" />
+    <Compile Include="TestClasses\WarriorWithConstructor.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

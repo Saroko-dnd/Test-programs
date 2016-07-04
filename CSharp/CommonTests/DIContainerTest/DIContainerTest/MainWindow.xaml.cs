@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ninject;
 using DIContainerTest.TestClasses;
+using DIContainerTest.Resources;
 
 namespace DIContainerTest
 {
@@ -27,10 +28,23 @@ namespace DIContainerTest
             InitializeComponent();
 
             //Example without constructor
-            IKernel TestKernelObject = new StandardKernel();
-            TestKernelObject.Bind<IWeapon>().To<Bow>();
-            Warrior TestWarriorObject = TestKernelObject.Get<Warrior>();
-            LabelWarriorGear.Content = TestWarriorObject.GetGearAsString();
+            IKernel FirstTestKernelObject = new StandardKernel();
+            FirstTestKernelObject.Bind<IWeapon>().To<Bow>();
+            Warrior FirstTestWarriorObject = FirstTestKernelObject.Get<Warrior>();
+            LabelFirstWarriorGear.Content = FirstTestWarriorObject.GetGearAsString();
+
+            //Example with constructor
+            IKernel SecondTestKernelObject = new StandardKernel();
+            SecondTestKernelObject.Bind<IWeapon>().To<Sword>().WithConstructorArgument(Texts.ConstructorArgumentName, Texts.Material);
+            Warrior SecondTestWarriorObject = SecondTestKernelObject.Get<Warrior>();
+            LabelSecondWarriorGear.Content = SecondTestWarriorObject.GetGearAsString();
+
+            //Both classes have constructors
+            IKernel ThirdTestKernelObject = new StandardKernel();
+            ThirdTestKernelObject.Bind<IWeapon>().To<Sword>().WithConstructorArgument(Texts.ConstructorArgumentName, Texts.Material);
+            var foo = new Ninject.Parameters.ConstructorArgument(Texts.ConsrtuctotArgumentNameForWarrior, Texts.NameOfWarrior);
+            WarriorWithConstructor TestWarriorWithConstructorObject = ThirdTestKernelObject.Get<WarriorWithConstructor>(foo);
+            LabeldWarriorWithConstructorGear.Content = TestWarriorWithConstructorObject.GetGearAsString();
         }
     }
 }

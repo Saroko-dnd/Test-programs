@@ -70,11 +70,65 @@ namespace DIContainerTest.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на NewName.
+        /// </summary>
+        public static string ConsrtuctotArgumentNameForWarrior {
+            get {
+                return ResourceManager.GetString("ConsrtuctotArgumentNameForWarrior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на NewSwordMaterial.
+        /// </summary>
+        public static string ConstructorArgumentName {
+            get {
+                return ResourceManager.GetString("ConstructorArgumentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Warrior has:.
         /// </summary>
         public static string Gear {
             get {
                 return ResourceManager.GetString("Gear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на has:.
+        /// </summary>
+        public static string Has {
+            get {
+                return ResourceManager.GetString("Has", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на steel.
+        /// </summary>
+        public static string Material {
+            get {
+                return ResourceManager.GetString("Material", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Sand.
+        /// </summary>
+        public static string NameOfWarrior {
+            get {
+                return ResourceManager.GetString("NameOfWarrior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на sword.
+        /// </summary>
+        public static string Sword {
+            get {
+                return ResourceManager.GetString("Sword", resourceCulture);
             }
         }
     }
