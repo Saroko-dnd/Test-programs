@@ -42,8 +42,8 @@ namespace DIContainerTest
             //Both classes have constructors
             IKernel ThirdTestKernelObject = new StandardKernel();
             ThirdTestKernelObject.Bind<IWeapon>().To<Sword>().WithConstructorArgument(Texts.ConstructorArgumentName, Texts.Material);
-            var foo = new Ninject.Parameters.ConstructorArgument(Texts.ConsrtuctotArgumentNameForWarrior, Texts.NameOfWarrior);
-            WarriorWithConstructor TestWarriorWithConstructorObject = ThirdTestKernelObject.Get<WarriorWithConstructor>(foo);
+            var ParameterForConstructor = new Ninject.Parameters.ConstructorArgument(Texts.ConsrtuctotArgumentNameForWarrior, Texts.NameOfWarrior);
+            WarriorWithConstructor TestWarriorWithConstructorObject = ThirdTestKernelObject.Get<WarriorWithConstructor>(ParameterForConstructor);
             LabeldWarriorWithConstructorGear.Content = TestWarriorWithConstructorObject.GetGearAsString();
         }
     }
