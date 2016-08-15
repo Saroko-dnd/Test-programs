@@ -27,12 +27,6 @@ void QuickSort(ArrayType* Array, int LeftPosition, int RightPosition)
 		}
 	}
 
-	for (int index = 0; index < 11; ++index)
-	{
-		cout << Array[index] << " ";
-	}
-	cout << "\r\n";
-
 	if (LeftPosition < RightPosCopy)
 	{
 		QuickSort(Array, LeftPosition, RightPosCopy);

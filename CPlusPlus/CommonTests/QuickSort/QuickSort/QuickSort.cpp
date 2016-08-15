@@ -9,8 +9,8 @@ using namespace std;
 
 int main()
 {
-	int ArraySize = 11;
-	int TestIntArray[11] = { 1, 1, 10, 8, 9, 1, 1, 1, 5, 1, 1};
+	int ArraySize = 9;
+	int TestIntArray[9] = { 1, 2, 3, 3, 4, 2, 3, 4, 6};
 
 	cout << "Array before my QuickSort function" << endl;
 	for (int index = 0; index < ArraySize; ++index)
@@ -19,7 +19,7 @@ int main()
 	}
 
 	cout << "\r\n";
-	QuickSort<int>(TestIntArray, 0, 10);
+	QuickSort<int>(TestIntArray, 0, 8);
 
 	cout << "\r\nArray after my QuickSort function" << endl;
 	for (int index = 0; index < ArraySize; ++index)
