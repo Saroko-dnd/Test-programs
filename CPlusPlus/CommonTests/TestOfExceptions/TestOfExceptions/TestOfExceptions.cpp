@@ -38,6 +38,7 @@ int main()
 	}
 	catch (string * SecondStringException)
 	{
+		delete SecondStringException;
 		cout << "Second catch for string exception" << endl;
 	}
 	catch (int SecondIntException)

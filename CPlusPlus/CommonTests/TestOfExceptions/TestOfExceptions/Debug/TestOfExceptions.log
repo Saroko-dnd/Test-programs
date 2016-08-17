@@ -1,6 +1,5 @@
 ﻿  TestOfExceptions.cpp
 l:\iteducation\testprograms\test-programs\cplusplus\commontests\testofexceptions\testofexceptions\testofexceptions.cpp(28): warning C4101: StringException: неиспользованная локальная переменная
 l:\iteducation\testprograms\test-programs\cplusplus\commontests\testofexceptions\testofexceptions\testofexceptions.cpp(33): warning C4101: IntException: неиспользованная локальная переменная
-l:\iteducation\testprograms\test-programs\cplusplus\commontests\testofexceptions\testofexceptions\testofexceptions.cpp(39): warning C4101: SecondStringException: неиспользованная локальная переменная
-l:\iteducation\testprograms\test-programs\cplusplus\commontests\testofexceptions\testofexceptions\testofexceptions.cpp(43): warning C4101: SecondIntException: неиспользованная локальная переменная
+l:\iteducation\testprograms\test-programs\cplusplus\commontests\testofexceptions\testofexceptions\testofexceptions.cpp(44): warning C4101: SecondIntException: неиспользованная локальная переменная
   TestOfExceptions.vcxproj -> L:\iteducation\TestPrograms\Test-programs\CPlusPlus\CommonTests\TestOfExceptions\Debug\TestOfExceptions.exe
