@@ -34,6 +34,26 @@ class RedBlackTree
         this.Root = null;
     }
 
+    InsertNodeFixTree(CurrentNode)
+    {
+        if (CurrentNode.Parent.Parent == null)
+        {
+            CurrentNode.Color = Colors.red;
+        }
+        else if (CurrentNode.Parent.Parent.Left.Color == Colors.black && CurrentNode.Parent.Parent.Right.Color == Colors.black)
+        {
+            CurrentNode.Color = Colors.red;
+        }
+        else if (CurrentNode.Parent.Parent.Left.Color == Colors.red && CurrentNode.Parent.Parent.Right.Color == Colors.red) {
+            CurrentNode.Parent.Parent.Color = Colors.red;
+            CurrentNode.Parent.Parent.Left.Color = Colors.black;
+            CurrentNode.Parent.Parent.Right.Color = Colors.black;
+            CurrentNode.Color = Colors.red;
+            this.InsertNodeFixTree(CurrentNode.Parent.Parent);
+        }
+        this.Root.Color = Colors.black;
+    }
+
     InsertNode(NewNode)
     {
         if (this.Root == null)
@@ -67,6 +87,7 @@ class RedBlackTree
                     NodeWasInserted = true;
                 }
             }
+            InsertNodeFixTree(NewNode);
         }
     }
 }
