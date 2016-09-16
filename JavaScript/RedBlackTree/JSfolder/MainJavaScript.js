@@ -51,7 +51,32 @@ class RedBlackTree
             CurrentNode.Color = Colors.red;
             this.InsertNodeFixTree(CurrentNode.Parent.Parent);
         }
+        else if (CurrentNode == CurrentNode.Parent.Left && CurrentNode.Parent.Color == Colors.red && CurrentNode.Parent == CurrentNode.Parent.Parent.Left &&
+            CurrentNode.Parent.Parent.Right.Color == Colors.black) {
+            CurrentNode.Color = Colors.red;
+            RightTurnNormal(CurrentNode.Parent);
+        }
+        else if (CurrentNode == CurrentNode.Parent.Right && CurrentNode.Parent.Color == Colors.red && CurrentNode.Parent == CurrentNode.Parent.Parent.Left &&
+            CurrentNode.Parent.Parent.Right.Color == Colors.black) {
+            CurrentNode.Color = Colors.black;
+            RightTurnAbnormal(CurrentNode.Parent);
+        }
         this.Root.Color = Colors.black;
+    }
+
+    RightTurnNormal(CurrentNode)
+    {
+        CurrentNode.Right = CurrentNode.Parent;
+        CurrentNode.Parent = CurrentNode.Parent.Parent;
+        CurrentNode.Right.Parent = CurrentNode;
+        CurrentNode.Color = Colors.black;
+        CurrentNode.Right.Color = Colors.red;
+
+        InsertNodeFixTree(CurrentNode);
+    }
+
+    RightTurnAbnormal(CurrentNode) {
+
     }
 
     InsertNode(NewNode)
