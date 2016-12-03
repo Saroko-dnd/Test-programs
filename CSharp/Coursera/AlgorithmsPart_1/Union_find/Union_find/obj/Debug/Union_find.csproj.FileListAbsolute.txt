@@ -1,0 +1,14 @@
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\bin\Debug\Union_find.exe.config
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\bin\Debug\Union_find.exe
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\bin\Debug\Union_find.pdb
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\obj\Debug\Union_find.csprojResolveAssemblyReference.cache
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\obj\Debug\MainWindow.g.cs
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\obj\Debug\App.g.cs
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\obj\Debug\Union_find_MarkupCompile.cache
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\obj\Debug\Union_find_MarkupCompile.lref
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\obj\Debug\MainWindow.baml
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\obj\Debug\Union_find.g.resources
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\obj\Debug\Union_find.Properties.Resources.resources
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\obj\Debug\Union_find.csproj.GenerateResource.Cache
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\obj\Debug\Union_find.exe
+L:\iteducation\TestPrograms\Test-programs\CSharp\Coursera\AlgorithmsPart_1\Union_find\Union_find\obj\Debug\Union_find.pdb

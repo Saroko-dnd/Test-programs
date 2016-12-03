@@ -1,0 +1,8 @@
+L:\iteducation\TestPrograms\Test-programs\CSharp\Sorts\MergesortTesting\MergesortTesting\bin\Debug\MergesortTesting.exe.config
+L:\iteducation\TestPrograms\Test-programs\CSharp\Sorts\MergesortTesting\MergesortTesting\bin\Debug\MergesortTesting.exe
+L:\iteducation\TestPrograms\Test-programs\CSharp\Sorts\MergesortTesting\MergesortTesting\bin\Debug\MergesortTesting.pdb
+L:\iteducation\TestPrograms\Test-programs\CSharp\Sorts\MergesortTesting\MergesortTesting\obj\Debug\MergesortTesting.csprojResolveAssemblyReference.cache
+L:\iteducation\TestPrograms\Test-programs\CSharp\Sorts\MergesortTesting\MergesortTesting\obj\Debug\MergesortTesting.exe
+L:\iteducation\TestPrograms\Test-programs\CSharp\Sorts\MergesortTesting\MergesortTesting\obj\Debug\MergesortTesting.pdb
+L:\iteducation\TestPrograms\Test-programs\CSharp\Sorts\MergesortTesting\MergesortTesting\bin\Debug\MergesortBySarokoIV.dll
+L:\iteducation\TestPrograms\Test-programs\CSharp\Sorts\MergesortTesting\MergesortTesting\bin\Debug\MergesortBySarokoIV.pdb
