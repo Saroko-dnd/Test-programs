@@ -19,9 +19,8 @@ class Base
 			CurrentValue = NewValue;
 		}
 
-		~Base()
+		virtual ~Base()
 		{
-			cout << "Base destructor!\r\n";
-			system("pause");
+
 		}
 };

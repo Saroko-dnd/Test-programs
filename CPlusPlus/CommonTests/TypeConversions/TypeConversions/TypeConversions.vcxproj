@@ -150,11 +150,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseClass.h" />
+    <ClInclude Include="DerivedClass.h" />
+    <ClInclude Include="SecondBaseClass.h" />
+    <ClInclude Include="SecondDerivedClass.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseClass.cpp" />
+    <ClCompile Include="DerivedClass.cpp" />
+    <ClCompile Include="SecondBaseClass.cpp" />
+    <ClCompile Include="SecondDerivedClass.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TypeConversions.cpp" />
   </ItemGroup>

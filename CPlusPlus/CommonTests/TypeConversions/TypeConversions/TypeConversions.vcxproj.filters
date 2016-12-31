@@ -33,6 +33,15 @@
     <ClInclude Include="BaseClass.h">
       <Filter>Заголовочные файлы\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="DerivedClass.h">
+      <Filter>Заголовочные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondBaseClass.h">
+      <Filter>Заголовочные файлы\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondDerivedClass.h">
+      <Filter>Заголовочные файлы\Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +51,15 @@
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
     <ClCompile Include="BaseClass.cpp">
+      <Filter>Файлы исходного кода\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="DerivedClass.cpp">
+      <Filter>Файлы исходного кода\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondBaseClass.cpp">
+      <Filter>Файлы исходного кода\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondDerivedClass.cpp">
       <Filter>Файлы исходного кода\Classes</Filter>
     </ClCompile>
   </ItemGroup>
