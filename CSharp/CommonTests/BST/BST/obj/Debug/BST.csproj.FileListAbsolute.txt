@@ -1,0 +1,6 @@
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\BST\BST\bin\Debug\BST.exe.config
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\BST\BST\bin\Debug\BST.exe
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\BST\BST\bin\Debug\BST.pdb
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\BST\BST\obj\Debug\BST.csprojResolveAssemblyReference.cache
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\BST\BST\obj\Debug\BST.exe
+L:\iteducation\TestPrograms\Test-programs\CSharp\CommonTests\BST\BST\obj\Debug\BST.pdb
