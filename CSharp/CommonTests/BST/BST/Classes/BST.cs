@@ -8,6 +8,9 @@ namespace BST.Classes
 {
     class BST<KeyType, ValueType> where KeyType : IComparable<KeyType>
     {
+        private static bool Red = true;
+        private static bool Black = false;
+
         private object GatesToInorderTraversal = new object();
 
         private Node<KeyType, ValueType> RootNode = null;
@@ -51,11 +54,62 @@ namespace BST.Classes
 
         }
 
+        private Node<KeyType, ValueType> FlipColors(Node<KeyType, ValueType> CurrentNode)
+        {
+            if (CurrentNode == RootNode)
+            {
+                CurrentNode.LinkColor = Black;
+            }
+            else
+            {
+                CurrentNode.LinkColor = Red;
+            }
+            CurrentNode.RightNode.LinkColor = Black;
+            CurrentNode.LeftNode.LinkColor = Black;
+            return CurrentNode;
+        }
+
+        private bool IsRed(Node<KeyType, ValueType> CurrentNode)
+        {
+            if (CurrentNode == null)
+            {
+                return Black;
+            }
+            else
+            {
+                return CurrentNode.LinkColor;
+            }
+        }
+
+        private Node<KeyType, ValueType> RotateLeft(Node<KeyType, ValueType> CurrentNode)
+        {
+            Node<KeyType, ValueType> BufferForRightNode = CurrentNode.RightNode;
+            BufferForRightNode.LinkColor = CurrentNode.LinkColor;
+            CurrentNode.RightNode = BufferForRightNode.LeftNode;
+            CurrentNode.LinkColor = Red;
+            BufferForRightNode.LeftNode = CurrentNode;
+            return BufferForRightNode;
+        }
+
+        private Node<KeyType, ValueType> RotateRight(Node<KeyType, ValueType> CurrentNode)
+        {
+            Node<KeyType, ValueType> BufferForLeftNode = CurrentNode.LeftNode;
+            BufferForLeftNode.LinkColor = CurrentNode.LinkColor;
+            CurrentNode.LeftNode = BufferForLeftNode.RightNode;
+            BufferForLeftNode.RightNode = CurrentNode;
+            CurrentNode.LinkColor = Red;
+            return BufferForLeftNode;
+        }
+
         private Node<KeyType, ValueType> AddKeyValueToBST(Node<KeyType, ValueType> CurrentNode, KeyType NewKey, ValueType NewValue)
         {
             if (CurrentNode == null)
             {
-                return new Node<KeyType, ValueType>(NewKey, NewValue);
+                if (RootNode == null)
+                {
+                    return new Node<KeyType, ValueType>(NewKey, NewValue) { LinkColor = Black };
+                }
+                return new Node<KeyType, ValueType>(NewKey, NewValue) { LinkColor = Red };
             }
             else
             {
@@ -66,6 +120,7 @@ namespace BST.Classes
                     CurrentNode.Value = NewValue;
                     return CurrentNode;
                 }
+
                 else if (CmpResult < 0)
                 {
                     CurrentNode.LeftNode = AddKeyValueToBST(CurrentNode.LeftNode, NewKey, NewValue);
@@ -74,7 +129,26 @@ namespace BST.Classes
                 {
                     CurrentNode.RightNode = AddKeyValueToBST(CurrentNode.RightNode, NewKey, NewValue);
                 }
+
             }
+
+            if (CurrentNode.LeftNode != null && CurrentNode.LeftNode.LeftNode != null)
+            {
+                if (IsRed(CurrentNode.LeftNode) && IsRed(CurrentNode.LeftNode.LeftNode))
+                {
+                    CurrentNode = RotateRight(CurrentNode);
+                }
+            }
+            if (IsRed(CurrentNode.LeftNode) && IsRed(CurrentNode.RightNode))
+            {
+                CurrentNode = FlipColors(CurrentNode);
+            }
+
+            if (CurrentNode.RightNode != null && CurrentNode.RightNode.LinkColor == Red)
+            {
+                CurrentNode = RotateLeft(CurrentNode);
+            }
+
 
             CurrentNode.Size = 1 + GetSizeOfNode(CurrentNode.LeftNode) + GetSizeOfNode(CurrentNode.RightNode);
             return CurrentNode;
@@ -129,6 +203,7 @@ namespace BST.Classes
             public _ValueType Value { get; set; }
             public Node<_KeyType, _ValueType> LeftNode { get; set; }
             public Node<_KeyType, _ValueType> RightNode { get; set; }
+            public bool LinkColor { get; set; }
 
             public Node(_KeyType NewKey, _ValueType NewValue)
             {
