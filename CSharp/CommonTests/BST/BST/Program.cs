@@ -29,6 +29,19 @@ namespace BST
                 Console.WriteLine(FoundInt);
             }
 
+            int LowestKey = -1;
+            int HighestKey = 5; 
+            Console.WriteLine("Range count (" + LowestKey + ", " + HighestKey + "):");
+            Console.WriteLine(TestBST.RangeCount(LowestKey, HighestKey));
+
+            Console.WriteLine("Range keys (" + LowestKey + ", " + HighestKey + "):");
+            foreach (int FoundKey in TestBST.RangeKeys(LowestKey, HighestKey))
+            {
+                Console.WriteLine(FoundKey);
+            }
+
+            TestBST.DeleteKeyValuePair(-3);
+
             Console.ReadKey();
         }
     }

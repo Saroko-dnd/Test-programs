@@ -27,9 +27,28 @@ namespace BST.Classes
             }
         }
 
+        private Node<KeyType, ValueType> Min(Node<KeyType, ValueType> RootOfTreeForSearch)
+        {
+
+            if (RootOfTreeForSearch == null)
+            {
+                return null;
+            }
+            while (RootOfTreeForSearch.LeftNode != null)
+            {
+                RootOfTreeForSearch = RootOfTreeForSearch.LeftNode;
+            }
+
+            return RootOfTreeForSearch;
+        }
+
         private Node<KeyType, ValueType> Max(Node<KeyType, ValueType> RootOfTreeForSearch)
         {
 
+            if (RootOfTreeForSearch == null)
+            {
+                return null;
+            }
             while (RootOfTreeForSearch.RightNode != null)
             {
                 RootOfTreeForSearch = RootOfTreeForSearch.RightNode;
@@ -38,25 +57,99 @@ namespace BST.Classes
             return RootOfTreeForSearch;
         }
 
-        private Node<KeyType, ValueType> DeleteMax(Node<KeyType, ValueType> RootOfTreeForSearch)
+        private Node<KeyType, ValueType> MoveRedRight(Node<KeyType, ValueType> SelectedNode)
         {
-
-            if(RootOfTreeForSearch.RightNode != null)
+            FlipColors(SelectedNode);
+            if (IsRed(SelectedNode.LeftNode.LeftNode))
             {
-                RootOfTreeForSearch.RightNode = DeleteMax(RootOfTreeForSearch.RightNode);
-                RootOfTreeForSearch.Size = 1 + GetSizeOfNode(RootOfTreeForSearch.LeftNode) + GetSizeOfNode(RootOfTreeForSearch.RightNode);
-                return RootOfTreeForSearch;
+                SelectedNode = RotateRight(SelectedNode);
+                FlipColors(SelectedNode);
             }
-            else 
+            return SelectedNode;
+        }
+
+        private Node<KeyType, ValueType> MoveRedLeft(Node<KeyType, ValueType> SelectedNode)
+        {
+            FlipColors(SelectedNode);
+            if (IsRed(SelectedNode.RightNode.LeftNode))
             {
-                return RootOfTreeForSearch.LeftNode;
+                SelectedNode.RightNode = RotateRight(SelectedNode.RightNode);
+                SelectedNode = RotateLeft(SelectedNode);
+                FlipColors(SelectedNode);
+            }
+            return SelectedNode;
+        }
+
+        private Node<KeyType, ValueType> _DeleteMax(Node<KeyType, ValueType> RootOfTreeForSearch)
+        {
+            if (RootOfTreeForSearch == null)
+            {
+                return null;
+            }
+            if (IsRed(RootOfTreeForSearch.LeftNode))
+            {
+                RootOfTreeForSearch = RotateRight(RootOfTreeForSearch);
+            }
+            if (RootOfTreeForSearch.RightNode == null)
+            {
+                return null;
+            }
+            if (!IsRed(RootOfTreeForSearch.RightNode) && !IsRed(RootOfTreeForSearch.RightNode.LeftNode))
+            {
+                RootOfTreeForSearch = MoveRedRight(RootOfTreeForSearch);
             }
 
+            RootOfTreeForSearch.RightNode = _DeleteMax(RootOfTreeForSearch.RightNode);
+            return BalanceSelectedNode(RootOfTreeForSearch);
+        }
+
+        private Node<KeyType, ValueType> _DeleteMin(Node<KeyType, ValueType> RootOfTreeForSearch)
+        {
+            if (RootOfTreeForSearch == null)
+            {
+                return null;
+            }
+            if (RootOfTreeForSearch.LeftNode == null)
+            {
+                return null;
+            }
+            if (!IsRed(RootOfTreeForSearch.LeftNode) && !IsRed(RootOfTreeForSearch.LeftNode.LeftNode))
+            {
+                RootOfTreeForSearch = MoveRedLeft(RootOfTreeForSearch);
+            }
+
+            RootOfTreeForSearch.LeftNode = _DeleteMin(RootOfTreeForSearch.LeftNode);
+            return BalanceSelectedNode(RootOfTreeForSearch);
+        }
+
+        private Node<KeyType, ValueType> BalanceSelectedNode(Node<KeyType, ValueType> SelectedNode)
+        {
+            if (SelectedNode.LeftNode != null && SelectedNode.LeftNode.LeftNode != null)
+            {
+                if (IsRed(SelectedNode.LeftNode) && IsRed(SelectedNode.LeftNode.LeftNode))
+                {
+                    SelectedNode = RotateRight(SelectedNode);
+                }
+            }
+
+            if (IsRed(SelectedNode.LeftNode) && IsRed(SelectedNode.RightNode))
+            {
+                SelectedNode = FlipColors(SelectedNode);
+            }
+
+            if (IsRed(SelectedNode.RightNode))
+            {
+                SelectedNode = RotateLeft(SelectedNode);
+            }
+
+            SelectedNode.Size = 1 + GetSizeOfNode(SelectedNode.LeftNode) + GetSizeOfNode(SelectedNode.RightNode);
+            return SelectedNode;
         }
 
         private Node<KeyType, ValueType> FlipColors(Node<KeyType, ValueType> CurrentNode)
         {
-            if (CurrentNode == RootNode)
+
+            if (CurrentNode.LinkColor == Red)
             {
                 CurrentNode.LinkColor = Black;
             }
@@ -64,8 +157,28 @@ namespace BST.Classes
             {
                 CurrentNode.LinkColor = Red;
             }
-            CurrentNode.RightNode.LinkColor = Black;
-            CurrentNode.LeftNode.LinkColor = Black;
+            if (CurrentNode.RightNode != null)
+            {
+                if (CurrentNode.RightNode.LinkColor == Red)
+                {
+                    CurrentNode.RightNode.LinkColor = Black;
+                }
+                else
+                {
+                    CurrentNode.RightNode.LinkColor = Red;
+                }
+            }
+            if (CurrentNode.LeftNode != null)
+            {
+                if (CurrentNode.LeftNode.LinkColor == Red)
+                {
+                    CurrentNode.LeftNode.LinkColor = Black;
+                }
+                else
+                {
+                    CurrentNode.LeftNode.LinkColor = Red;
+                }
+            }
             return CurrentNode;
         }
 
@@ -88,6 +201,10 @@ namespace BST.Classes
             CurrentNode.RightNode = BufferForRightNode.LeftNode;
             CurrentNode.LinkColor = Red;
             BufferForRightNode.LeftNode = CurrentNode;
+
+            CurrentNode.Size = 1 + GetSizeOfNode(CurrentNode.LeftNode) + GetSizeOfNode(CurrentNode.RightNode);
+            BufferForRightNode.Size = 1 + GetSizeOfNode(BufferForRightNode.LeftNode) + GetSizeOfNode(BufferForRightNode.RightNode);
+
             return BufferForRightNode;
         }
 
@@ -98,6 +215,10 @@ namespace BST.Classes
             CurrentNode.LeftNode = BufferForLeftNode.RightNode;
             BufferForLeftNode.RightNode = CurrentNode;
             CurrentNode.LinkColor = Red;
+
+            CurrentNode.Size = 1 + GetSizeOfNode(CurrentNode.LeftNode) + GetSizeOfNode(CurrentNode.RightNode);
+            BufferForLeftNode.Size = 1 + GetSizeOfNode(BufferForLeftNode.LeftNode) + GetSizeOfNode(BufferForLeftNode.RightNode);
+
             return BufferForLeftNode;
         }
 
@@ -105,10 +226,6 @@ namespace BST.Classes
         {
             if (CurrentNode == null)
             {
-                if (RootNode == null)
-                {
-                    return new Node<KeyType, ValueType>(NewKey, NewValue) { LinkColor = Black };
-                }
                 return new Node<KeyType, ValueType>(NewKey, NewValue) { LinkColor = Red };
             }
             else
@@ -166,34 +283,129 @@ namespace BST.Classes
 
                 if (CmpResult < 0)
                 {
+                    if (CurrentNode.LeftNode == null)
+                    {
+                        return CurrentNode;
+                    }
+                    if (!IsRed(CurrentNode.LeftNode) && !IsRed(CurrentNode.LeftNode.LeftNode))
+                    {
+                        CurrentNode = MoveRedLeft(CurrentNode);
+                    }
                     CurrentNode.LeftNode = _DeleteKeyValuePair(CurrentNode.LeftNode, KeyForSearch);
                 }
                 else if (CmpResult > 0)
                 {
+                    if (IsRed(CurrentNode.LeftNode))
+                    {
+                        CurrentNode = RotateRight(CurrentNode);
+                    }
+                    if (CurrentNode.RightNode == null)
+                    {
+                        return CurrentNode;
+                    }
+                    if (!IsRed(CurrentNode.RightNode) && !IsRed(CurrentNode.RightNode.LeftNode))
+                    {
+                        MoveRedRight(CurrentNode);
+                    }
                     CurrentNode.RightNode = _DeleteKeyValuePair(CurrentNode.RightNode, KeyForSearch);
                 }
                 else
                 {
+                    Node<KeyType, ValueType> BufferForCurrentNode = CurrentNode;
+                    Node<KeyType, ValueType> NodeWithReplacements = null;
+                    bool MaxMustBeDeleted = false;
+
                     if (CurrentNode.LeftNode == null)
                     {
-                        return CurrentNode.RightNode;
+                        NodeWithReplacements = Min(CurrentNode.RightNode);
                     }
                     else if (CurrentNode.RightNode == null)
                     {
-                        return CurrentNode.LeftNode;
+                        NodeWithReplacements = Max(CurrentNode.LeftNode);
+                        MaxMustBeDeleted = true;
                     }
                     else
                     {
-                        Node<KeyType, ValueType> BufferForCurrentNode = CurrentNode;
-                        CurrentNode = Max(BufferForCurrentNode.LeftNode);
-                        BufferForCurrentNode.LeftNode = DeleteMax(BufferForCurrentNode.LeftNode);
-                        CurrentNode.LeftNode = BufferForCurrentNode.LeftNode;
-                        CurrentNode.RightNode = BufferForCurrentNode.RightNode;
+                        NodeWithReplacements = Max(CurrentNode.LeftNode);
+                        MaxMustBeDeleted = true;
+                    }
+
+                    if (NodeWithReplacements == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        CurrentNode.Key = NodeWithReplacements.Key;
+                        CurrentNode.Value = NodeWithReplacements.Value;
+
+                        if (MaxMustBeDeleted)
+                        {
+                            CurrentNode.LeftNode = _DeleteMax(CurrentNode.LeftNode);
+                        }
+                        else
+                        {
+                            CurrentNode.RightNode = _DeleteMin(CurrentNode.RightNode);
+                        }
                     }
                 }
             }
-            CurrentNode.Size = 1 + GetSizeOfNode(CurrentNode.LeftNode) + GetSizeOfNode(CurrentNode.RightNode);
+
+            CurrentNode = BalanceSelectedNode(CurrentNode);
             return CurrentNode;
+        }
+
+        private int _RangeCount(Node<KeyType, ValueType> CurrentNode, KeyType LowestKey, KeyType HigestKey)
+        {
+            if (CurrentNode == null)
+            {
+                return 0;
+            }
+            else
+            {
+                int Counter = 0;
+                int CmpResultForLowestKey = CurrentNode.Key.CompareTo(LowestKey);
+                int CmpResultForHigestKey = CurrentNode.Key.CompareTo(HigestKey);
+                if (CmpResultForLowestKey > 0 && CurrentNode.LeftNode != null)
+                {
+                    Counter += _RangeCount(CurrentNode.LeftNode, LowestKey, HigestKey);
+                }
+                if (CmpResultForLowestKey >= 0 && CmpResultForHigestKey <= 0)
+                {
+                    Counter += 1;
+                }
+                if (CmpResultForHigestKey < 0 && CurrentNode.RightNode != null)
+                {
+                    Counter += _RangeCount(CurrentNode.RightNode, LowestKey, HigestKey);
+                }
+                return Counter;
+            }
+        }
+
+        private List<KeyType> _RangeKeys(Node<KeyType, ValueType> CurrentNode, KeyType LowestKey, KeyType HigestKey, List<KeyType> ListForKeys)
+        {
+            if (CurrentNode == null)
+            {
+                return ListForKeys;
+            }
+            else
+            {
+                int CmpResultForLowestKey = CurrentNode.Key.CompareTo(LowestKey);
+                int CmpResultForHigestKey = CurrentNode.Key.CompareTo(HigestKey);
+                if (CmpResultForLowestKey > 0 && CurrentNode.LeftNode != null)
+                {
+                    _RangeKeys(CurrentNode.LeftNode, LowestKey, HigestKey, ListForKeys);
+                }
+                if (CmpResultForLowestKey >= 0 && CmpResultForHigestKey <= 0)
+                {
+                    ListForKeys.Add(CurrentNode.Key);
+                }
+                if (CmpResultForHigestKey < 0 && CurrentNode.RightNode != null)
+                {
+                    _RangeKeys(CurrentNode.RightNode, LowestKey, HigestKey, ListForKeys);
+                }
+                return ListForKeys;
+            }
         }
 
         private class Node<_KeyType, _ValueType>
@@ -218,6 +430,7 @@ namespace BST.Classes
         public void AddNewKeyValuePair(KeyType NewKey, ValueType NewValue)
         {
             RootNode = AddKeyValueToBST(RootNode, NewKey, NewValue);
+            RootNode.LinkColor = Black;
         }
 
         public List<KeyType> GetListOfKeysInSortedOrder()
@@ -263,6 +476,30 @@ namespace BST.Classes
         public void DeleteKeyValuePair(KeyType KeyForSearch)
         {
             RootNode = _DeleteKeyValuePair(RootNode, KeyForSearch);
+            RootNode.LinkColor = Black;
+        }
+
+        public int RangeCount(KeyType LowestKey, KeyType HigestKey)
+        {
+            return _RangeCount(RootNode, LowestKey, HigestKey);
+        }
+
+        public List<KeyType> RangeKeys(KeyType LowestKey, KeyType HigestKey)
+        {
+            List<KeyType> ListForKeys = new List<KeyType>();
+            return _RangeKeys(RootNode, LowestKey, HigestKey, ListForKeys);
+        }
+
+        public void DeleteMax()
+        {
+            RootNode = _DeleteMax(RootNode);
+            RootNode.LinkColor = Black;
+        }
+
+        public void DeleteMin()
+        {
+            RootNode = _DeleteMin(RootNode);
+            RootNode.LinkColor = Black;
         }
     }
 }
