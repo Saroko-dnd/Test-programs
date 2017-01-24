@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>L:/iteducation/TestPrograms/Test-programs/CSharp/MonoGame/FirstTry/FirstTry/Content/Fonts/SquareBlock.spritefont</SourceFile>
+  <SourceTime>2017-01-23T20:08:19.1473693+02:00</SourceTime>
+  <DestFile>L:/iteducation/TestPrograms/Test-programs/CSharp/MonoGame/FirstTry/FirstTry/Content/bin/Windows/Fonts/SquareBlock.xnb</DestFile>
+  <DestTime>2017-01-23T20:09:14.861556+02:00</DestTime>
+  <Importer>FontDescriptionImporter</Importer>
+  <ImporterTime>2016-03-30T09:36:08+03:00</ImporterTime>
+  <Processor>FontDescriptionProcessor</Processor>
+  <ProcessorTime>2016-03-30T09:36:08+03:00</ProcessorTime>
+  <Parameters>
+    <Key>TextureFormat</Key>
+    <Value>Compressed</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

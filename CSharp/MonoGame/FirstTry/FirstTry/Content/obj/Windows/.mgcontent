@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>L:/iteducation/TestPrograms/Test-programs/CSharp/MonoGame/FirstTry/FirstTry/Content/Images/maxresdefault.png</File>
+    <File>L:/iteducation/TestPrograms/Test-programs/CSharp/MonoGame/FirstTry/FirstTry/Content/Fonts/TestSpriteFont.spritefont</File>
+    <File>L:/iteducation/TestPrograms/Test-programs/CSharp/MonoGame/FirstTry/FirstTry/Content/Images/Button.png</File>
+    <File>L:/iteducation/TestPrograms/Test-programs/CSharp/MonoGame/FirstTry/FirstTry/Content/Fonts/SquareBlock.spritefont</File>
+  </SourceFiles>
+</SourceFileCollection>
