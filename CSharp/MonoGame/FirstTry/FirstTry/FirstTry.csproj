@@ -41,6 +41,7 @@
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Controls\Clickable .cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameObjects\AlgorithmDecimalToBinary.cs" />
     <Compile Include="GameObjects\SelectorOfAlgorithms.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -50,6 +51,7 @@
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>

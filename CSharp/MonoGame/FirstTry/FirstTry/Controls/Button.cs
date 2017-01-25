@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -12,47 +13,61 @@ namespace FirstTry.Controls
 
     public class Button : Clickable
     {
-        public enum States { Usual, MouseOver, Pressed };
-        string assetName;
-        Texture2D texture;
-        float currentLayerDepth;
-        Rectangle usualRectangle;
-        Rectangle mouseOverRectangle;
-        Rectangle pressedRectangle;     
-        States currentStateOfButton = States.Usual;
-        public event OnButtonClick OnClick;
 
-        float textXPosition;
-        float textYPosition;
-        SpriteFont currentSpriteFont;
-        string text = "Button";
+        public int ID { get; set; }
+        string _assetName;
+        Texture2D _texture;
+        float _currentLayerDepth;
+        Rectangle _usualRectangle;
+        Rectangle _mouseOverRectangle;
+        Rectangle _pressedRectangle;     
+        States _currentStateOfButton = States.Usual;
+
+        ContentManager _content;
+
+        string _fontName;
+        float _textXPosition;
+        float _textYPosition;
+        SpriteFont _currentSpriteFont;
+        string _text = "Button";
+
+        public enum States { Usual, MouseOver, Pressed };
+        public event OnButtonClick OnClick;
 
         public string Text
         {
             get
             {
-                return text;
+                return _text;
             }
 
             set
             {
-                text = value;
-                Vector2 renderedTextSize = currentSpriteFont.MeasureString(Text);
-                textXPosition = (Rectangle.X + (Rectangle.Width / 2)) - (renderedTextSize.X / 2);
-                textYPosition = (Rectangle.Y + (Rectangle.Height / 2)) - (renderedTextSize.Y / 2);
+                _text = value;
+                if (_currentSpriteFont != null)
+                {
+                    _setTextPositions();
+                }
             }
+        }
+
+        private void _setTextPositions()
+        {
+            Vector2 renderedTextSize = _currentSpriteFont.MeasureString(Text);
+            _textXPosition = (Rectangle.X + (Rectangle.Width / 2)) - (renderedTextSize.X / 2);
+            _textYPosition = (Rectangle.Y + (Rectangle.Height / 2)) - (renderedTextSize.Y / 2);
         }
 
         public SpriteFont CurrentSpriteFont
         {
             get
             {
-                return currentSpriteFont;
+                return _currentSpriteFont;
             }
 
             set
             {
-                currentSpriteFont = value;
+                _currentSpriteFont = value;
             }
         }
 
@@ -61,21 +76,30 @@ namespace FirstTry.Controls
             OnClick(this);
         }
 
-        public Button(Game1 game, string textureName,Rectangle sourceRectangleForUsualState, Rectangle sourceRectangleForMouseOverState, Rectangle sourceRectangleForPressedState, Rectangle targetRectangle, 
-            float layerDepth, SpriteFont font)
+        
+        public Button(Game1 game, ContentManager content, string textureName,Rectangle sourceRectangleForUsualState, Rectangle sourceRectangleForMouseOverState, Rectangle sourceRectangleForPressedState, Rectangle targetRectangle, 
+            float layerDepth, string fontName)
             : base(game, targetRectangle)
         {
-            assetName = textureName;
-            currentLayerDepth = layerDepth;
-            usualRectangle = sourceRectangleForUsualState;
-            mouseOverRectangle = sourceRectangleForMouseOverState;
-            pressedRectangle = sourceRectangleForPressedState;
-            currentSpriteFont = font;
+            _assetName = textureName;
+            _currentLayerDepth = layerDepth;
+            _usualRectangle = sourceRectangleForUsualState;
+            _mouseOverRectangle = sourceRectangleForMouseOverState;
+            _pressedRectangle = sourceRectangleForPressedState;
+            _content = content;
+            _fontName = fontName;
         }
 
         protected override void LoadContent()
         {
-            texture = Game.Content.Load<Texture2D>(assetName);
+            _texture = _content.Load<Texture2D>(_assetName);
+            _currentSpriteFont = _content.Load<SpriteFont>(_fontName);
+
+            if (_text != null)
+            {
+                _setTextPositions();
+            }
+
             base.LoadContent();
         }
 
@@ -84,15 +108,15 @@ namespace FirstTry.Controls
             HandleInput();
             if (IsPressed)
             {
-                currentStateOfButton = States.Pressed;
+                _currentStateOfButton = States.Pressed;
             }
             else if (MouseOver)
             {
-                currentStateOfButton = States.MouseOver;
+                _currentStateOfButton = States.MouseOver;
             }
             else
             {
-                currentStateOfButton = States.Usual;
+                _currentStateOfButton = States.Usual;
             }
 
             base.Update(gameTime);
@@ -101,23 +125,23 @@ namespace FirstTry.Controls
         public override void Draw(GameTime gameTime)
         {
             Game.SpriteBatch.Begin();
-            if (currentStateOfButton == States.Usual )
+            if (_currentStateOfButton == States.Usual )
             {
-                Game.SpriteBatch.Draw(texture, sourceRectangle: usualRectangle, destinationRectangle: Rectangle, layerDepth: currentLayerDepth,
+                Game.SpriteBatch.Draw(_texture, sourceRectangle: _usualRectangle, destinationRectangle: Rectangle, layerDepth: _currentLayerDepth,
                     effects: SpriteEffects.FlipVertically | SpriteEffects.FlipHorizontally);
-                Game.SpriteBatch.DrawString(currentSpriteFont, text, new Vector2(textXPosition, textYPosition), Color.Black, 0.0f, new Vector2(0, 0), 1.0f,
+                Game.SpriteBatch.DrawString(_currentSpriteFont, _text, new Vector2(_textXPosition, _textYPosition), Color.Black, 0.0f, new Vector2(0, 0), 1.0f,
                     SpriteEffects.None, 0.0f);
             }
-            else if (currentStateOfButton == States.MouseOver)
+            else if (_currentStateOfButton == States.MouseOver)
             {
-                Game.SpriteBatch.Draw(texture, sourceRectangle: mouseOverRectangle, destinationRectangle: Rectangle, layerDepth: currentLayerDepth);
-                Game.SpriteBatch.DrawString(currentSpriteFont, text, new Vector2(textXPosition, textYPosition), Color.Blue, 0.0f, new Vector2(0, 0), 1.0f,
+                Game.SpriteBatch.Draw(_texture, sourceRectangle: _mouseOverRectangle, destinationRectangle: Rectangle, layerDepth: _currentLayerDepth);
+                Game.SpriteBatch.DrawString(_currentSpriteFont, _text, new Vector2(_textXPosition, _textYPosition), Color.Blue, 0.0f, new Vector2(0, 0), 1.0f,
                     SpriteEffects.None, 0.0f);
             }
-            else if (currentStateOfButton == States.Pressed)
+            else if (_currentStateOfButton == States.Pressed)
             {
-                Game.SpriteBatch.Draw(texture, sourceRectangle: pressedRectangle, destinationRectangle: Rectangle, layerDepth: currentLayerDepth);
-                Game.SpriteBatch.DrawString(currentSpriteFont, text, new Vector2(textXPosition, textYPosition + 5), Color.Blue, 0.0f, new Vector2(0, 0), 1.0f,
+                Game.SpriteBatch.Draw(_texture, sourceRectangle: _pressedRectangle, destinationRectangle: Rectangle, layerDepth: _currentLayerDepth);
+                Game.SpriteBatch.DrawString(_currentSpriteFont, _text, new Vector2(_textXPosition, _textYPosition + 5), Color.Blue, 0.0f, new Vector2(0, 0), 1.0f,
                     SpriteEffects.None, 0.0f);
             } 
             
@@ -125,9 +149,5 @@ namespace FirstTry.Controls
             base.Draw(gameTime);
         }
 
-        public new void Dispose()
-        {
-            int ggg = 9;
-        }
     }
 }

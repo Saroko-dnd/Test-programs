@@ -1,4 +1,5 @@
 ﻿using FirstTry.Controls;
+using FirstTry.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,32 +14,31 @@ namespace FirstTry
     {
         public enum Algorithms { DecimalToBinary, Second };
 
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        Texture2D TestImage;
-        Vector2 Test2dPosition;
-        Vector2 Test2dTextPosition;
-        Vector2 Test2dTextOrigin;
+        GraphicsDeviceManager _graphics;
+        SpriteBatch _spriteBatch;
+        Texture2D _testImage;
+        Vector2 _test2dPosition;
+        Vector2 _test2dTextPosition;
+        Vector2 _test2dTextOrigin;
 
-        SpriteFont testSpriteFont;
-        SpriteFont spriteFontForMenuOptions;
+        SpriteFont _testSpriteFont;
+        SpriteFont _spriteFontForMenuOptions;
 
-        bool componentsEmpty = false;
+        SelectorOfAlgorithms _currentGameContentAndLogic;
 
-        List<Button> ListOfButtons = new List<Button>();
-
-        DrawableGameComponent CurrentGameContentAndLogic;       
+        bool _userDemandsExit;
+        bool _gameWindowCanBeClosed;        
 
         public SpriteBatch SpriteBatch
         {
             get
             {
-                return spriteBatch;
+                return _spriteBatch;
             }
 
             private set
             {
-                spriteBatch = value;
+                _spriteBatch = value;
             }
         }
 
@@ -46,20 +46,20 @@ namespace FirstTry
         {
             get
             {
-                return testSpriteFont;
+                return _testSpriteFont;
             }
 
             set
             {
-                testSpriteFont = value;
+                _testSpriteFont = value;
             }
         }
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _currentGameContentAndLogic = new SelectorOfAlgorithms(this, "Fonts/SquareBlock", "Images/Button", new Rectangle(0, 0, 200, 50));
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            
         }
 
         /// <summary>
@@ -71,15 +71,25 @@ namespace FirstTry
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            this.graphics.PreferredBackBufferWidth = 1000;  // set this value to the desired width of your window
-            this.graphics.PreferredBackBufferHeight = 800;   // set this value to the desired height of your window        
-            this.graphics.ApplyChanges();
+            this._graphics.PreferredBackBufferWidth = 1000;  // set this value to the desired width of your window
+            this._graphics.PreferredBackBufferHeight = 800;   // set this value to the desired height of your window 
+            this._graphics.ApplyChanges();
             
             this.IsMouseVisible = true;
             
-            Test2dPosition = new Vector2(0,0);
-            Test2dTextPosition = new Vector2(50,50);
-            Test2dTextOrigin = new Vector2(0,0);
+            _test2dPosition = new Vector2(0,0);
+            _test2dTextPosition = new Vector2(50,50);
+            _test2dTextOrigin = new Vector2(0,0);
+
+            this.Window.Title = "Algorithms";
+
+            System.Windows.Forms.Form f = System.Windows.Forms.Form.FromHandle(Window.Handle) as System.Windows.Forms.Form;
+            if (f != null)
+            {
+                f.FormClosing += gameFormClosing;
+            }
+
+            _currentGameContentAndLogic.Initialize();
 
             base.Initialize();
         }
@@ -91,18 +101,13 @@ namespace FirstTry
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            TestImage = this.Content.Load<Texture2D>("Images/maxresdefault");
+            _testImage = this.Content.Load<Texture2D>("Images/maxresdefault");
             TestSpriteFont = this.Content.Load<SpriteFont>("Fonts/TestSpriteFont");
-            spriteFontForMenuOptions = this.Content.Load<SpriteFont>("Fonts/SquareBlock");
+            _spriteFontForMenuOptions = this.Content.Load<SpriteFont>("Fonts/SquareBlock");
 
-            ListOfButtons.Add(new Button(this, "Images/Button", new Rectangle(2, 134, 202, 50), new Rectangle(2, 6, 202, 50), new Rectangle(2, 70, 202, 50), new Rectangle(0, 0, 200, 50), 0.9f, 
-                spriteFontForMenuOptions){Text = "Decimal to Binary" });
-            foreach (Button FoundComponent in ListOfButtons)
-            {
-                FoundComponent.Initialize();
-            }
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -124,34 +129,35 @@ namespace FirstTry
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (gameTime.TotalGameTime.Seconds > 5 && !componentsEmpty)
+            if (_userDemandsExit)
             {
-                Components.Remove(Components[0]);
-                componentsEmpty = true;
+                _currentGameContentAndLogic.Dispose();
+                _gameWindowCanBeClosed = true;
+                Exit();
+            }
+            else
+            {
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    Exit();
+                else if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                {
+                    _test2dPosition.X -= 1;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                {
+                    _test2dPosition.X += 1;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                {
+                    _test2dPosition.Y -= 1;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                {
+                    _test2dPosition.Y += 1;
+                }
             }
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            else if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                Test2dPosition.X -= 1;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                Test2dPosition.X += 1;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
-                Test2dPosition.Y -= 1;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Down))
-            {
-                Test2dPosition.Y += 1;
-            }
-            foreach (DrawableGameComponent FoundComponent in ListOfButtons)
-            {
-                FoundComponent.Update(gameTime);
-            }
+            _currentGameContentAndLogic.Update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -165,17 +171,30 @@ namespace FirstTry
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-            spriteBatch.Draw(TestImage, Test2dPosition, layerDepth: 1.0f);
-            spriteBatch.DrawString(TestSpriteFont, "Test text", Test2dTextPosition, Color.Blue, 0.0f, Test2dTextOrigin, 1.0f, SpriteEffects.None, 0.0f);
-            spriteBatch.End();
-            foreach (DrawableGameComponent FoundComponent in ListOfButtons)
-            {
-                FoundComponent.Draw(gameTime);
-            }
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(_testImage, _test2dPosition, layerDepth: 1.0f);
+            _spriteBatch.DrawString(TestSpriteFont, "Test text", _test2dTextPosition, Color.Blue, 0.0f, _test2dTextOrigin, 1.0f, SpriteEffects.None, 0.0f);
+            _spriteBatch.End();
+
+            _currentGameContentAndLogic.Draw(gameTime);
+
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        void gameFormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            /*if (!_gameWindowCanBeClosed)
+            {
+                _userDemandsExit = true;
+                e.Cancel = true;
+            }*/
+        }
+
+        public new void Dispose()
+        {
+            int ggg = 9;
         }
     }
 }

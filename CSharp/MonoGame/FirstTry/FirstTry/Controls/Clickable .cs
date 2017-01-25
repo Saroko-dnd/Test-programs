@@ -13,23 +13,23 @@ namespace FirstTry.Controls
     {
 
         #region Fields
-        readonly Rectangle rectangle;
-        bool wasPressed;
-        bool isPressed;
-        bool mouseOver;
-        bool objectCanBeClicked;
+        readonly Rectangle _rectangle;
+        bool _wasPressed;
+        bool _isPressed;
+        bool _mouseOver;
+        bool _objectCanBeClicked;
 
         public bool MouseOver
         {
             get
             {
-                return mouseOver;
+                return _mouseOver;
             }
         }
 
         #region Protected accessors
-        public bool IsPressed { get { return isPressed; } }
-        public bool IsClicked { get { return (wasPressed == true) && (isPressed == false); } }
+        public bool IsPressed { get { return _isPressed; } }
+        public bool IsClicked { get { return (_wasPressed == true) && (_isPressed == false); } }
         protected new Game1 Game
         {
             get
@@ -38,7 +38,7 @@ namespace FirstTry.Controls
             }
         }
 
-        protected Rectangle Rectangle { get { return rectangle; } }
+        protected Rectangle Rectangle { get { return _rectangle; } }
 
         #endregion
         #endregion
@@ -53,7 +53,7 @@ namespace FirstTry.Controls
             : base(game)
         {
             
-            rectangle = targetRectangle;
+            _rectangle = targetRectangle;
         }
         #endregion
 
@@ -68,29 +68,29 @@ namespace FirstTry.Controls
             Rectangle cursorRect = new Rectangle((int)currentMouseState.Position.X - 5, (int)currentMouseState.Position.Y - 5,
                 10, 10);
 
-            bool intersection = rectangle.Intersects(cursorRect);
+            bool intersection = _rectangle.Intersects(cursorRect);
 
             if (!intersection)
             {
-                mouseOver = false;
-                objectCanBeClicked = false;
-                isPressed = false;
-                wasPressed = false;
+                _mouseOver = false;
+                _objectCanBeClicked = false;
+                _isPressed = false;
+                _wasPressed = false;
             }
             else
             {
-                mouseOver = true;
-                wasPressed = isPressed;
+                _mouseOver = true;
+                _wasPressed = _isPressed;
             }
 
             if (currentMouseState.LeftButton == ButtonState.Released && intersection)
             {
-                objectCanBeClicked = true;
-                isPressed = false;
+                _objectCanBeClicked = true;
+                _isPressed = false;
             }
-            else if (currentMouseState.LeftButton == ButtonState.Pressed && objectCanBeClicked)
+            else if (currentMouseState.LeftButton == ButtonState.Pressed && _objectCanBeClicked)
             {
-                isPressed = true;
+                _isPressed = true;
             }
 
         }
